@@ -1,0 +1,34 @@
+//here question goes like this (you can always google) 
+You are given an array arr[] of n integers and q queries in an array queries[] of length 2*q containing l, r pair for all q queries.
+You need to compute the following sum over q queries.
+
+Array is 1-Indexed.
+//here it is the solution of gfg problem of the day of date 18 sept 2021
+    vector<int> querySum(int n, int arr[], int q, int queries[])
+    {
+        //this concept is important go on taking the sum and storing it in the 
+        //vector v now we do not need to sum the element again again and again 
+        //just we have to take the difference according to the given queries.
+        vector<int> v , ans;
+        int i;
+        int sum = 0;
+        for(i=0; i<n; i++)
+        {
+            sum += arr[i];
+            v.push_back(sum);
+        }
+        for(i=0; i<2*q-1; i++)
+        {
+            if(queries[i] - 2 < 0)
+            {
+                ans.push_back(v[queries[i+1]-1]);
+                i++;
+            }
+            else{
+                ans.push_back(v[queries[i+1]-1] - v[queries[i] - 2]);
+                i++;
+            }
+        }
+        return ans;
+        // code here
+    }
